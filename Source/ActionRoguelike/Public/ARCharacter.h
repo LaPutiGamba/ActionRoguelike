@@ -19,25 +19,37 @@ public:
 protected:
 	// Camera
 	UPROPERTY(EditAnywhere)
-	class USpringArmComponent* SpringArmComp;
+	TObjectPtr<class USpringArmComponent> SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* CameraComp;
+	TObjectPtr<class UCameraComponent> CameraComp;
 
 	// Input Mappings
-	UPROPERTY(EditAnywhere, Category = "Input Mappings")
-	UInputMappingContext* DefaultMapping;
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Input Mappings")
+	TObjectPtr<UInputMappingContext> DefaultMapping;
 
 	// Input
-	UPROPERTY(EditAnywhere, Category = "Input Actions")
-	UInputAction* MoveAction;
-	UPROPERTY(EditAnywhere, Category = "Input Actions")
-	UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Input Actions")
+	TObjectPtr<UInputAction> MoveAction;
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Input Actions")
+	TObjectPtr<UInputAction> LookAction;
+
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Input Actions")
+	TObjectPtr<UInputAction> JumpAction;
+
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Input Actions")
+	TObjectPtr<UInputAction> PrimaryAttackAction;
+
+	// Projectile
+	UPROPERTY(EditAnywhere, Category = "ARCharacter|Projectile")
+	TSubclassOf<AActor> ProjectileClass;
 
 	virtual void BeginPlay() override;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+
+	void PrimaryAttack();
 
 public:	
 	virtual void Tick(float DeltaTime) override;

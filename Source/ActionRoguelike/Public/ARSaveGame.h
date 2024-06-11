@@ -1,0 +1,33 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/SaveGame.h"
+#include "ARSaveGame.generated.h"
+
+USTRUCT()
+struct FActorSaveData
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	FString ActorName;
+
+	UPROPERTY()
+	FTransform ActorTransform;
+
+	UPROPERTY()
+	TArray<uint8> ByteData;
+};
+
+UCLASS()
+class ACTIONROGUELIKE_API UARSaveGame : public USaveGame
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY()
+	int32 Credits;
+
+	UPROPERTY()
+	TArray<FActorSaveData> SavedActors;
+};

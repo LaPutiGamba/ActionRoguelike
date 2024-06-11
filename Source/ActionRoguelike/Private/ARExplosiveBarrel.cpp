@@ -9,15 +9,16 @@ AARExplosiveBarrel::AARExplosiveBarrel()
 
 	RadialForceComp = CreateDefaultSubobject<URadialForceComponent>(TEXT("RadialForceComp"));
 	RadialForceComp->SetupAttachment(MeshComp);
-	RadialForceComp->Radius = 700.f;
-	RadialForceComp->ImpulseStrength = 2000.f;
+	RadialForceComp->Radius = 750.f;
+	RadialForceComp->ImpulseStrength = 2500.f;
 	RadialForceComp->bImpulseVelChange = true;
 	RadialForceComp->bAutoActivate = false;
+	RadialForceComp->AddCollisionChannelToAffect(ECC_WorldDynamic);
 }
 
-void AARExplosiveBarrel::BeginPlay()
+void AARExplosiveBarrel::PostInitializeComponents()
 {
-	Super::BeginPlay();
+	Super::PostInitializeComponents();
 
 	MeshComp->OnComponentHit.AddDynamic(this, &AARExplosiveBarrel::OnHit);
 }
